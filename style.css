@@ -25,6 +25,7 @@ body{
   height: var(--cell-size);
   border: black solid 1px;
   position: relative;
+  cursor: pointer;
 }
 /* nth child */
 .cell:nth-child(1),.cell:nth-child(2),.cell:nth-child(3){
@@ -41,17 +42,74 @@ body{
   border-bottom: none;
 }
 
-.x::before,.x::after{
+.cell.x::before, .cell.x::after, .board.x .cell:not(.x):not(.circle):hover::before, .board.x .cell:not(.x):not(.circle):hover::after{
   content: '';
   position: absolute;
   width: calc(var(--cell-size) * 0.9);
   height: 10px;
   background: black;
   top: calc(var(--cell-size) / 2);
+  left: calc(var(--cell-size) * 0.05);
 }
-.x::before{
+.cell.x::before, .board.x .cell:not(.x):not(.circle):hover::before{
   transform: rotate(45deg);
 }
-.x::after{
+.cell.x::after, .board.x .cell:not(.x):not(.circle):hover::after{
   transform: rotate(-45deg);
+}
+.board.x .cell:not(.x):not(.circle):hover::before, .board.x .cell:not(.x):not(.circle):hover::after, .board.circle .cell:not(.x):not(.circle):hover::before, .board.circle .cell:not(.x):not(.circle):hover::after{
+  opacity: 0.2;
+}
+
+.cell.x,.cell.circle {
+  cursor: not-allowed;
+} 
+
+.cell.circle::before,.cell.circle::after, .board.circle .cell:not(.x):not(.circle):hover::before, .board.circle .cell:not(.x):not(.circle):hover::after{
+  content: '';
+  position: absolute;
+  width: calc(var(--cell-size) * 0.9);
+  height: calc(var(--cell-size) * 0.9);
+  border-radius: 50%;
+  border: 10px solid black;
+  top: calc(var(--cell-size) * 0.05);
+  left: calc(var(--cell-size) * 0.04);
+}
+
+.winner-modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.winner-modal button{
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.winner-modal button:hover{
+  box-shadow: 1px 1px 10px 1px black;
+  padding: 25px 30px;
+  font-size: 25px;
+}
+.winner-message {
+  color: white;
+  font-size: 50px;
+  margin-bottom: 20px;
+  font-size: 50px;
+}
+.winner-modal.show{
+  display: flex;
 }
