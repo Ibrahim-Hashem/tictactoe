@@ -59,6 +59,7 @@ body{
 }
 .board.x .cell:not(.x):not(.circle):hover::before, .board.x .cell:not(.x):not(.circle):hover::after, .board.circle .cell:not(.x):not(.circle):hover::before, .board.circle .cell:not(.x):not(.circle):hover::after{
   opacity: 0.2;
+  /* background: rgb(223, 223, 223); */
 }
 
 .cell.x,.cell.circle {
