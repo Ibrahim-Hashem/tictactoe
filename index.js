@@ -40,9 +40,24 @@ function checkWin(parent,turn){
     if(cells[a].classList.contains(turn) && cells[b].classList.contains(turn) && cells[c].classList.contains(turn)){
       winnerModal.classList.add('show');
       winnerModal.querySelector('.winner-message').innerHTML = `${turn} won`;
+      return;
     }
   });
+  checkDraw(cells);
 }
+
+function checkDraw(cells){
+  let draw = true;
+  cells.forEach(cell => {
+    if(!cell.classList.contains('x') && !cell.classList.contains('circle')){
+      draw = false;
+    }
+  });
+  if(draw){
+    winnerModal.classList.add('show');
+    winnerModal.querySelector('.winner-message').innerHTML = `Draw`;
+  }
+};
 
 function checkTurn(){
   if(board.classList.contains('x')){
